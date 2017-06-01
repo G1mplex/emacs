@@ -45,6 +45,7 @@
  'nyan-mode
  'angular-mode
  'web-mode
+ 'paredit
 )
 
 (load-theme 'dracula t)
@@ -160,8 +161,6 @@
 ;;; activate, otherwise, auto-complete will
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
-(define-key js-mode-map "{" 'paredit-open-curly)
-(define-key js-mode-map "}" 'paredit-close-curly-and-newline)
 ;;; npm install -g tern
 (add-hook 'js-mode-hook (lambda () (tern-mode t)))
 (eval-after-load 'tern
