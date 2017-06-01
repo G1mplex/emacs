@@ -126,7 +126,6 @@
 (add-to-list 'load-path "~/.emacs.d/custom")
 
 (require 'setup-helm)
-
 (global-flycheck-mode)
 
 (elpy-enable)
@@ -143,10 +142,6 @@
 
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
-
-
-
-
 
 
 ;;;;javascript and webdev extensions
