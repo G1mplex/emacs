@@ -22,7 +22,7 @@
 ;; === List my packages ===
 ;; simply add package names to the list
 (ensure-package-installed
- 'paganini-theme
+ 'dracula-theme
  'better-defaults
  'auctex
  'yasnippet
@@ -37,9 +37,17 @@
  'volatile-highlights
  'flycheck
  'dashboard
+ 'js2-mode
+ 'ac-js2
+ 'auto-complete
+ 'tern
+ 'tern-auto-complete
+ 'nyan-mode
+ 'angular-mode
+ 'web-mode
 )
 
-(load-theme 'paganini t)
+(load-theme 'dracula t)
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -112,7 +120,8 @@
 (global-set-key (kbd "M-<down>") 'move-line-down)
 
 
-(global-company-mode)
+;; no company mode in js2 since ac-js2 is better
+;;(global-company-mode)
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 
@@ -129,4 +138,41 @@
   :config
   (dashboard-setup-startup-hook))
 
-(global-anzu-mode 1)
+(global-anzu-mode +1)
+(nyan-mode +1)
+
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
+
+
+
+
+
+
+;;;;javascript and webdev extensions
+;; open json files with js-mode
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(setq js2-highlight-level 3)
+;;; auto complete mode
+;;; should be loaded after yasnippet so that they can work together
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+;;; set the trigger key so that it can work together with yasnippet on tab key,
+;;; if the word exists in yasnippet, pressing tab will cause yasnippet to
+;;; activate, otherwise, auto-complete will
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
+(define-key js-mode-map "{" 'paredit-open-curly)
+(define-key js-mode-map "}" 'paredit-close-curly-and-newline)
+;;; npm install -g tern
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
+
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
