@@ -48,6 +48,7 @@
  'paredit
  'elpy
  'anzu
+ 'multiple-cursors
 )
 
 (load-theme 'dracula t)
@@ -90,7 +91,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(minimap-minimum-width 0)
- '(minimap-window-location (quote right)))
+ '(minimap-window-location (quote right))
+ '(package-selected-packages
+   (quote
+    (multiple-cursors web-mode volatile-highlights use-package tern-auto-complete paredit nyan-mode neotree minimap helm-projectile flycheck elpy dracula-theme dashboard company-auctex better-defaults anzu angular-mode ac-js2))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -145,6 +149,12 @@
 
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
+
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 
 ;;;;javascript and webdev extensions
