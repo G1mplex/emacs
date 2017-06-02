@@ -46,6 +46,8 @@
  'angular-mode
  'web-mode
  'paredit
+ 'elpy
+ 'anzu
 )
 
 (load-theme 'dracula t)
