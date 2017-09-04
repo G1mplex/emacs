@@ -147,6 +147,12 @@
 ;;;;javascript and webdev extensions
 ;; open json files with js-mode
 (require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; Better imenu
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+
+(require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-modeg))
 
 ;; Better imenu
